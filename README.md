@@ -1,2 +1,2 @@
 # RPGTemplate
-There must be a bug. In progress of fixing
+When you are fighting, use potions, listed in inventory or take an Axe
