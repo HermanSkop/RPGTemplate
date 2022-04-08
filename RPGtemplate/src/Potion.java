@@ -17,11 +17,6 @@ public class Potion extends Stuff {
         hero.setHealth(hero.getHealth() + healAmount);
         hero.setHand(null);
         System.out.println(healAmount + " HP gained");
-        System.out.println("What item do you need from backpack?");
-        Scanner read = new Scanner(System.in);
-        String name = read.nextLine();
-        hero.changeItem(name);
-
         return 0;
     }
 }

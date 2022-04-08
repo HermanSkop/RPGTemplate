@@ -44,15 +44,21 @@ public class Node {
     }
 
     public void showInventory() {
-        if (next != null) {
-            System.out.print(this.getItem().getName() + ", ");
-            next.showInventory();
-        } else System.out.println(this.getItem().getName() + ".");
+        try {
+            if (next != null) {
+                System.out.print(this.getItem().getName() + "(" + id + "), ");
+                next.showInventory();
+            } else System.out.println(this.getItem().getName() + "(" + id + ").");
+        }
+        catch (Exception e){
+            System.out.println("Backpack is empty!");
+        }
     }
 
     public Node getByName(String name) {
         Node temp;
-        if (!name.equals(item.getName())) {
+
+        if (!Objects.equals(name,item.getName())) {
             if (next != null) {
                 temp = next.getByName(name);
             } else {
@@ -61,6 +67,7 @@ public class Node {
         } else {
             temp = this;
         }
+
         return temp;
     }
 
@@ -73,24 +80,35 @@ public class Node {
     }
 
     public void reduceIdByOne(Node current) {
-        current.id--;
-        if (current.next != null) {
-            reduceIdByOne(current.next);
+        try {
+            current.id--;
+            if (current.next != null) {
+                reduceIdByOne(current.next);
+            }
+        }
+        catch (Exception e){
+            System.out.println("backpack is empty(");
         }
     }
 
-    public void remove(Node temp) {
-        if (temp.next != null && temp.id != 1) {
-            getById(temp.id - 1).setNext(temp.next);
-            reduceIdByOne(temp.next);
-        } else if (temp.id != 1) getById(temp.id - 1).setNext(null);
+    public void remove(Node elemToRemove) {
+        if (elemToRemove.next != null && elemToRemove.id != 1) {
+            getById(elemToRemove.id - 1).setNext(elemToRemove.next);
+            reduceIdByOne(elemToRemove.next);
+        }
+        else if (elemToRemove.id != 1) getById(elemToRemove.id - 1).setNext(null);
+        else if(elemToRemove.next == null){
+            //if (temp.next != null) temp.item = temp.next.item;
+            elemToRemove.item = null;
+        }
         else {
-            if (temp.next != null) temp.item = temp.next.item;
-            else temp.item = null;
-            temp.next = null;
+            elemToRemove.item = elemToRemove.next.item;
+            elemToRemove.next = elemToRemove.next.next;
+            removeById(getLast().id);
+            reduceIdByOne(elemToRemove.next);
         }
     }
-
+/*Сдвинуть айдишники влево*/
     public boolean removeByName(String Name) {
         Node temp = getByName(Name);
         if (temp != null) {
@@ -98,5 +116,11 @@ public class Node {
             return true;
         } else return false;
     }
-
+    public boolean removeById(int Id) {
+        Node temp = getById(Id);
+        if (temp != null) {
+            remove(temp);
+            return true;
+        } else return false;
+    }
 }

@@ -1,3 +1,6 @@
+import java.util.Objects;
+import java.util.Scanner;
+
 public class Avatar {
     private int capacity;
     private String characterName;
@@ -56,14 +59,31 @@ public class Avatar {
         hand = thing;
     }
 
+    public void action(){
+        System.out.println("What item do you need from backpack?(type backpack)");
+        Scanner read = new Scanner(System.in);
+        String name = read.nextLine();
+        if(Objects.equals(name, "backpack")){
+            showInventory();
+            action();
+        }
+        else if(Objects.equals(name, "hand")&&hand==null) System.out.println("Attack with no weapon?! Ok..");
+        else if(!Objects.equals(name, "hand")){
+            this.changeItem(name);
+        };
+        System.out.println("Attacking with " + hand.getName() + "..");
+    }
+
     public void changeItem(String itemName) {
         if (addItem(hand)) {
             try {
                 hand = backpack.getByName(itemName).getItem();
+
                 backpack.removeByName(itemName);
                 backpack.showInventory();
             } catch (NullPointerException exc) {
                 System.out.println("Item is not found(");
+                action();
             }
         }
     }
@@ -75,7 +95,7 @@ public class Avatar {
     public int attack() {
         if (hand != null) {
             return hand.getBaseAttack(this);
-        } else return 0;
+        } else return 1;
     }
 
     public double hurt(double hp) {
@@ -87,7 +107,7 @@ public class Avatar {
             if (backpack == null) {
                 backpack = new Node(item);
                 return true;
-            } else if (backpack != null && backpack.getLast().id < capacity) {
+            } else if (backpack.getLast().id < capacity) {
                 Node next = new Node(backpack.getLast(), item);
                 backpack.getLast().setNext(next);
                 return true;

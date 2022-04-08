@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1edfa029-35ef-4921-a52c-dc5bf3f92a74" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Arena.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Arena.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Avatar.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Avatar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Example.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Example.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Monster.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Monster.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Potion.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Potion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Stuff.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Stuff.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Warrior.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Warrior.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Weapon.class" beforeDir="false" afterPath="$PROJECT_DIR$/RPGtemplate/out/production/RPGtemplate/Weapon.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +32,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/RPGtemplate" />
   </component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -48,6 +57,8 @@
       <option name="presentableId" value="Default" />
       <updated>1649352183152</updated>
       <workItem from="1649352184466" duration="68000" />
+      <workItem from="1649355090738" duration="37000" />
+      <workItem from="1649355236049" duration="5000" />
     </task>
     <servers />
   </component>
