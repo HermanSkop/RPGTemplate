@@ -6,8 +6,8 @@ public class Avatar {
     private String characterName;
     private double health;
     private Stuff hand;
-    //private
     public Node backpack;
+    public Stuff rucksack;
 
     Avatar() {
         characterName = null;
@@ -60,7 +60,7 @@ public class Avatar {
     }
 
     public void action(){
-        System.out.println("What item do you need from backpack?(type backpack)");
+        System.out.println("What item do you need from backpack?('backpack'/'hand?')");
         Scanner read = new Scanner(System.in);
         String name = read.nextLine();
         if(Objects.equals(name, "backpack")){
@@ -68,21 +68,28 @@ public class Avatar {
             action();
         }
         else if(Objects.equals(name, "hand")&&hand==null) System.out.println("Attack with no weapon?! Ok..");
+        else if(Objects.equals(name, "hand?")&&hand==null) {
+            System.out.println("Hand is empty");
+            action();
+        }
+        else if(Objects.equals(name, "hand?")) {
+            System.out.println(getHand());
+            action();
+        }
         else if(!Objects.equals(name, "hand")){
             this.changeItem(name);
         };
-        System.out.println("Attacking with " + hand.getName() + "..");
     }
 
     public void changeItem(String itemName) {
-        if (addItem(hand)) {
+        if(!backpack.isFull(capacity)) {
+            addItem(hand);
             try {
-                hand = backpack.getByName(itemName).getItem();
-
-                backpack.removeByName(itemName);
-                backpack.showInventory();
+                hand = backpack.next.getByName(itemName).getItem();
+                backpack.next.removeByName(itemName);
+                backpack.next.showInventory();
             } catch (NullPointerException exc) {
-                System.out.println("Item is not found(");
+                System.out.println("item is not found");
                 action();
             }
         }
@@ -91,35 +98,28 @@ public class Avatar {
     public boolean isAlive() {
         return health > 0;
     }
-
     public int attack() {
         if (hand != null) {
             return hand.getBaseAttack(this);
         } else return 1;
     }
-
     public double hurt(double hp) {
         return health -= hp;
     }
-
-    public boolean addItem(Stuff item) {
+    public void addItem(Stuff item) {
         if (item != null) {
             if (backpack == null) {
-                backpack = new Node(item);
-                return true;
-            } else if (backpack.getLast().id < capacity) {
-                Node next = new Node(backpack.getLast(), item);
+                backpack = new Node(rucksack, item);
+            } else if (!backpack.isFull(capacity)) {
+                Node next = new Node(backpack.getLast(), item, backpack.head);
                 backpack.getLast().setNext(next);
-                return true;
             } else {
                 System.out.println("Backpack is FULL!");
-                return false;
             }
         }
-        return true;
     }
 
     public void showInventory() {
-        backpack.showInventory();
+        backpack.next.showInventory();
     }
 }

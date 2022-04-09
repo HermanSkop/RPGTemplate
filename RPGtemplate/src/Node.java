@@ -1,63 +1,59 @@
+import java.lang.annotation.ElementType;
 import java.util.Objects;
 
 public class Node {
     Node next;
     Stuff item;
     int id;
+    Node head;
 
-    Node(Stuff Item) {
+    Node(Stuff Item, Node Head) {
         item = Item;
         id = 1;
         next = null;
+        head = Head;
     }
-
-    Node(Node prev, Stuff Item) {
+    Node(Stuff MainItem, Stuff Item) {
+        item = MainItem;
+        id = 0;
+        head = this;
+        next = new Node(Item, head);
+        System.out.println(next.head);
+    }
+    Node(Node prev, Stuff Item, Node Head) {
         item = Item;
         id = prev.id + 1;
         next = null;
-    }
-
-    Node(Node prev) {
-        item = prev.item;
-        id = prev.id;
-        next = prev.next;
+        head = Head;
     }
 
     public Stuff getItem() {
         return item;
     }
-
     public Node getNext() {
         return next;
     }
-
     public Node getLast() {
-        Node temp = null;
         if (next != null) {
-            temp = next.getLast();
-        } else temp = this;
-        return temp;
+            return next.getLast();
+        } else return this;
     }
-
     public void setNext(Node next) {
         this.next = next;
     }
-
     public void showInventory() {
-        try {
+       try {
             if (next != null) {
                 System.out.print(this.getItem().getName() + "(" + id + "), ");
                 next.showInventory();
             } else System.out.println(this.getItem().getName() + "(" + id + ").");
         }
         catch (Exception e){
-            System.out.println("Backpack is empty!");
+            System.out.println("Something wrong in showInventory");;
         }
     }
-
     public Node getByName(String name) {
         Node temp;
-
         if (!Objects.equals(name,item.getName())) {
             if (next != null) {
                 temp = next.getByName(name);
@@ -70,57 +66,51 @@ public class Node {
 
         return temp;
     }
-
     public Node getById(int Id) {
-        Node temp = null;
         if (Id != id && next != null) {
-            temp = next.getById(Id);
-        } else temp = this;
-        return temp;
+            return next.getById(Id);
+        }
+        else if(Id!=id) return null;
+        else return this;
     }
-
     public void reduceIdByOne(Node current) {
-        try {
-            current.id--;
-            if (current.next != null) {
-                reduceIdByOne(current.next);
-            }
-        }
-        catch (Exception e){
-            System.out.println("backpack is empty(");
+        current.id--;
+        if (current.next != null) {
+            reduceIdByOne(current.next);
         }
     }
-
     public void remove(Node elemToRemove) {
         if (elemToRemove.next != null && elemToRemove.id != 1) {
             getById(elemToRemove.id - 1).setNext(elemToRemove.next);
             reduceIdByOne(elemToRemove.next);
         }
-        else if (elemToRemove.id != 1) getById(elemToRemove.id - 1).setNext(null);
+        else if (elemToRemove.id != 1) {
+            getById(elemToRemove.id - 1).setNext(null);
+        }
         else if(elemToRemove.next == null){
-            //if (temp.next != null) temp.item = temp.next.item;
             elemToRemove.item = null;
         }
         else {
-            elemToRemove.item = elemToRemove.next.item;
-            elemToRemove.next = elemToRemove.next.next;
-            removeById(getLast().id);
+            elemToRemove.id = -1;
+            Node temp = getById(2);
+            head.setNext(temp);
             reduceIdByOne(elemToRemove.next);
+            elemToRemove = null;
         }
     }
-/*Сдвинуть айдишники влево*/
-    public boolean removeByName(String Name) {
+    public void removeByName(String Name) {
         Node temp = getByName(Name);
         if (temp != null) {
             remove(temp);
-            return true;
-        } else return false;
+        }
     }
-    public boolean removeById(int Id) {
+    public void removeById(int Id) {
         Node temp = getById(Id);
         if (temp != null) {
             remove(temp);
-            return true;
-        } else return false;
+        }
+    }
+    public boolean isFull(int capacity){
+        return getLast().id == capacity;
     }
 }
